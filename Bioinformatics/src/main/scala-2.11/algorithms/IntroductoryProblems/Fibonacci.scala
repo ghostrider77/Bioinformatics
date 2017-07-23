@@ -11,7 +11,7 @@ object Fibonacci {
   }
 
   import SampleData.sample
-  import algorithms.Utils.UtilityFunctions.readInputData
+  import utils.UtilityFunctions.readInputData
 
   val inputFileName: String = "/algorithms/datasets/rosalind_fibo.txt"
 
@@ -24,7 +24,7 @@ object Fibonacci {
 
   def main(args: Array[String]): Unit = {
     val n: Int = getData(isPractice = false)
-    val result: Long = calcFibonacciNumber(n: Int)
+    val result: Long = calcFibonacciNumber(n)
     println(result)
   }
 

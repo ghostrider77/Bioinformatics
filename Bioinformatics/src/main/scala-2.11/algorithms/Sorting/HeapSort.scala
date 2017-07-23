@@ -16,7 +16,7 @@ object HeapSort {
 
   import SampleData.sample
   import algorithms.Datastructures.{Heap, MaxHeap}
-  import algorithms.Utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListAsStringToFile}
+  import utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListAsStringToFile}
 
   val inputFileName: String = "/algorithms/datasets/rosalind_hs.txt"
 

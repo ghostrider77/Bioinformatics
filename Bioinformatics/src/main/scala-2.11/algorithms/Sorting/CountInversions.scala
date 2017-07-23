@@ -16,7 +16,7 @@ object CountInversions {
 
   import scala.annotation.tailrec
   import SampleData.sample
-  import algorithms.Utils.UtilityFunctions.readInputData
+  import utils.UtilityFunctions.readInputData
 
   val inputFileName: String = "/algorithms/datasets/rosalind_inv.txt"
 

@@ -17,7 +17,7 @@ object PartialSort {
 
   import SampleData.sample
   import algorithms.Datastructures.{Heap, MinHeap}
-  import algorithms.Utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListAsStringToFile}
+  import utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListAsStringToFile}
 
   val inputFileName: String = "/algorithms/datasets/rosalind_ps.txt"
 

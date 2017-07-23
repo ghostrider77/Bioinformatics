@@ -16,7 +16,7 @@ object MergeSort {
 
   import scala.annotation.tailrec
   import SampleData.sample
-  import algorithms.Utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListAsStringToFile}
+  import utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListAsStringToFile}
 
   val inputFileName: String = "/algorithms/datasets/rosalind_ms.txt"
 

@@ -17,7 +17,7 @@ object Median {
 
   import scala.annotation.tailrec
   import SampleData.sample
-  import algorithms.Utils.UtilityFunctions.{convertStringToIntList, readInputData}
+  import utils.UtilityFunctions.{convertStringToIntList, readInputData}
 
   val inputFileName: String = "/algorithms/datasets/rosalind_med.txt"
 

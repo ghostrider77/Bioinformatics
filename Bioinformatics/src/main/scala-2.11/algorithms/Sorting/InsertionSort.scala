@@ -18,7 +18,7 @@ object InsertionSort {
 
   import scala.annotation.tailrec
   import SampleData.sample
-  import algorithms.Utils.UtilityFunctions.{readInputData, convertStringToIntList}
+  import utils.UtilityFunctions.{readInputData, convertStringToIntList}
 
   def getData(isPractice: Boolean): (Int, Array[Int]) = {
     val data: List[String] = if (isPractice) sample else readInputData(inputFileName)

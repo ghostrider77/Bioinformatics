@@ -18,7 +18,7 @@ object BinarySearch {
 
   import scala.annotation.tailrec
   import SampleData.sample
-  import algorithms.Utils.UtilityFunctions.{readInputData, convertStringToIntList, writeListAsStringToFile}
+  import utils.UtilityFunctions.{readInputData, convertStringToIntList, writeListAsStringToFile}
 
   val inputFileName: String = "/algorithms/datasets/rosalind_bins.txt"
 

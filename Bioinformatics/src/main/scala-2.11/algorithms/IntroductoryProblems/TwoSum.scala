@@ -20,7 +20,7 @@ object TwoSum {
   import scala.annotation.tailrec
   import scala.collection.mutable.{Map => MutableMap}
   import SampleData.sample
-  import algorithms.Utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListOfListsAsStringsToFile}
+  import utils.UtilityFunctions.{convertStringToIntList, readInputData, writeListOfListsAsStringsToFile}
 
   val inputFileName: String = "/algorithms/datasets/rosalind_2sum.txt"
 
