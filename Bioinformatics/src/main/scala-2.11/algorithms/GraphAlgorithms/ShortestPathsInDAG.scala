@@ -58,8 +58,7 @@ object ShortestPathsInDAG {
 
   def main(args: Array[String]): Unit = {
     val weightedGraph: WeightedGraph = getData(isPractice = false)
-    val result: List[String] =
-      findShortestPaths(weightedGraph, baseNode = 1).map(costToString)
+    val result: List[String] = findShortestPaths(weightedGraph, baseNode = 1).map(costToString)
     writeListAsStringToFile(result)
   }
 
