@@ -4,7 +4,7 @@ import org.scalatest.{FreeSpec, Matchers}
 
 class GraphAlgorithmsSuite extends FreeSpec with Matchers {
   import algorithms.Datastructures.{Graph, WeightedGraph}
-  import utils.GraphUtilityFunctions.{Edge, Node}
+  import utils.GraphUtilityFunctions.{Edge, Node, Component}
 
   "DegreeArray" - {
     import DegreeArray.{calcOutDegrees, getData}
@@ -195,6 +195,37 @@ class GraphAlgorithmsSuite extends FreeSpec with Matchers {
     "should calculate shortest paths for directed acyclic graphs from a given base node" in {
       val weightedGraph: WeightedGraph = getData(isPractice = true)
       findShortestPaths(weightedGraph, baseNode = 1).map(costToString) shouldEqual List("0", "x", "-4", "-2", "-3")
+    }
+  }
+
+  "TwoSatisfiability" - {
+    import scala.collection.mutable.{Map => MutableMap}
+    import TwoSatisfiability.{getData, isComponentContradictory, isCNFSatisfiable}
+
+    "isComponentContradictory" - {
+
+      "should return true when a component contains a literal and its negate as well" in {
+        val numberOfVariables: Int = 4
+        val component: Component = Set(2, 4, 5, 6)
+        isComponentContradictory(component, numberOfVariables)._1 shouldBe true
+      }
+
+      "should return a logical assignment of the literals in a component when it is not contradictory" in {
+        val numberOfVariables: Int = 4
+        val component: Component = Set(2, 4, 5)
+        val (isContradictory, assignment): (Boolean, MutableMap[Node, Boolean]) =
+          isComponentContradictory(component, numberOfVariables)
+        isContradictory shouldBe false
+        assignment.toMap shouldEqual Map(2 -> true, 4 -> true, 1 -> false)
+      }
+    }
+
+    "should return a valid logical assignment to a two-conjuctive-normal-form when possible" in {
+      val cnfGraphs: List[Graph] = getData(isPractice = true)
+      val result: List[List[Int]] = cnfGraphs.map(isCNFSatisfiable)
+      result.head shouldEqual List(0)
+      result(1).head shouldEqual 1
+      result(1).tail should (equal (List(1, -2, 3)) or equal (List(-1, 2, -3)))
     }
   }
 
