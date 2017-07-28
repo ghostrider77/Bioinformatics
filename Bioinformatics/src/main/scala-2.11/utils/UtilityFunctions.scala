@@ -1,6 +1,7 @@
 package utils
 
 import java.io.{BufferedWriter, File, FileWriter, InputStream}
+import Nucleotide.toChar
 
 object UtilityFunctions {
 
@@ -30,6 +31,15 @@ object UtilityFunctions {
       bw.write(line)
       bw.write("\n")
     }
+    bw.close()
+  }
+
+  def writeNucleotideListToFileAsString(nucleotides: List[Nucleotide],
+                                        outputFilename: String = "output.txt"): Unit = {
+    val file = new File(outputFilename)
+    val bw = new BufferedWriter(new FileWriter(file))
+    val result: String = nucleotides.map(toChar).mkString("")
+    bw.write(result)
     bw.close()
   }
 
