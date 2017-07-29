@@ -12,9 +12,9 @@ case class Dna(sequence: List[DnaNucleotide]) extends BaseSequence {
 
   def reverseComplement: Dna = {
     @tailrec
-    def loop(nucleotides: List[DnaNucleotide], acc: List[DnaNucleotide]): List[DnaNucleotide] = {
-      if (nucleotides.isEmpty) acc
-      else loop(nucleotides.tail, complements(nucleotides.head) :: acc)
+    def loop(ns: List[DnaNucleotide], acc: List[DnaNucleotide]): List[DnaNucleotide] = ns match {
+      case Nil => acc
+      case nucleotide :: nss => loop(nss, complements(nucleotide) :: acc)
     }
     Dna(loop(this.sequence, Nil))
   }
