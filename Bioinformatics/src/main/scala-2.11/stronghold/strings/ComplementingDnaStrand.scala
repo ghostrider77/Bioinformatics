@@ -1,11 +1,10 @@
 package stronghold.strings
 
+/**
+  * problem description: http://rosalind.info/problems/revc/
+  */
 
 object ComplementingDnaStrand {
-
-  /**
-    * problem description: http://rosalind.info/problems/revc/
-    */
 
   object SampleData {
     val sample: List[String] = List("AAAACCCGGT")
