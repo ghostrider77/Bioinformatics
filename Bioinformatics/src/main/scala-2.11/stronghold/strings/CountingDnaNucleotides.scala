@@ -12,8 +12,7 @@ object CountingDnaNucleotides {
 
   import SampleData.sample
   import utils.UtilityFunctions.readInputData
-  import utils.DnaNucleotide
-  import utils.Dna
+  import utils.{Dna, DnaNucleotide}
   import utils.Dna.convertDNAMapToList
 
   val inputFileName: String = "/stronghold/datasets/rosalind_dna.txt"

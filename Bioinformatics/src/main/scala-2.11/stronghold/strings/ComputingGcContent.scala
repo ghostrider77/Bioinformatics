@@ -24,7 +24,7 @@ object ComputingGcContent {
   import scala.annotation.tailrec
   import SampleData.sample
   import utils.UtilityFunctions.{Fasta, readInputData, readFastaSequences}
-  import utils.{C, G, Dna}
+  import utils.{Dna, Cytosine, Guanine}
 
   val inputFileName: String = "/stronghold/datasets/rosalind_gc.txt"
 
@@ -35,7 +35,7 @@ object ComputingGcContent {
 
   def calcGcPercentage(sequence: Fasta): Double = {
     val dna: Dna = Dna(sequence.string)
-    val gcContent: Int = dna.sequence.count(nucleotide => nucleotide == C || nucleotide == G)
+    val gcContent: Int = dna.sequence.count(nucleotide => nucleotide == Cytosine || nucleotide == Guanine)
     gcContent.toDouble / dna.length
   }
 

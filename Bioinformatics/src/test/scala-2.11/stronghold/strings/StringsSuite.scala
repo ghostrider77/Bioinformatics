@@ -1,10 +1,10 @@
 package stronghold.strings
 
 import org.scalatest.{FreeSpec, Matchers}
+import utils.{Dna, Rna}
+import utils.UtilityFunctions.Fasta
 
 class StringsSuite extends FreeSpec with Matchers {
-  import utils.{Dna, Rna}
-  import utils.UtilityFunctions.Fasta
 
   object Constants {
     val absoluteTolerance: Double = 0.001
@@ -38,8 +38,11 @@ class StringsSuite extends FreeSpec with Matchers {
 
   "ComplementingDnaStrand" - {
     import ComplementingDnaStrand.getData
-    val dna: Dna = getData(isPractice = true)
-    dna.reverseComplement.toString shouldEqual "ACCGGGTTTT"
+
+    "should complement the dample DNA strand" in {
+      val dna: Dna = getData(isPractice = true)
+      dna.reverseComplement.toString shouldEqual "ACCGGGTTTT"
+    }
   }
 
   "ComputingGcContent" - {
