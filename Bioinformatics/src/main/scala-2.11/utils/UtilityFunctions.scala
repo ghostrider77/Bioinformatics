@@ -3,14 +3,13 @@ package utils
 import java.io.{BufferedWriter, File, FileWriter, InputStream}
 import scala.collection.mutable.ListBuffer
 import scala.annotation.tailrec
-import Nucleotide.toChar
+import Rna.toNucleotide
 
 object UtilityFunctions {
 
   case class Fasta(name: String, string: String)
 
   def convertStringToIntList(line: String, sep: String = " "): List[Int] = line.split(sep).map(_.toInt).toList
-
 
   def convertToOneBasedIndexing(indices: List[Int]): List[Int] = indices.map(_ + 1)
 
@@ -41,6 +40,22 @@ object UtilityFunctions {
     }
   }
 
+  def readRnaCodonTable(): Map[Codon, AminoAcid] = {
+    val filename: String = "/datafiles/RNA_codon_table.txt"
+    val fileStream: InputStream = getClass.getResourceAsStream(filename)
+    val lines: Iterator[String] = scala.io.Source.fromInputStream(fileStream).getLines()
+
+    def aminoAcidEncodedByCodon(line: String): Option[(Codon, AminoAcid)] = line.split(" ").toList match {
+      case List(codon, oneLetterCode) => Some(Codon(codon.map(toNucleotide).toList), AminoAcid(oneLetterCode.head))
+      case _ => None
+    }
+
+    (for {
+      line <- lines
+      encoding <- aminoAcidEncodedByCodon(line)
+    } yield encoding).toMap
+  }
+
   def writeListAsStringToFile[T](lst: List[T], outputFilename: String = "output.txt", sep: String = " "): Unit = {
     val file = new File(outputFilename)
     val bw = new BufferedWriter(new FileWriter(file))
@@ -66,8 +81,15 @@ object UtilityFunctions {
                                         outputFilename: String = "output.txt"): Unit = {
     val file = new File(outputFilename)
     val bw = new BufferedWriter(new FileWriter(file))
-    val result: String = nucleotides.map(toChar).mkString("")
+    val result: String = nucleotides.map(Nucleotide.toChar).mkString("")
     bw.write(result)
+    bw.close()
+  }
+
+  def writeProteinToFileAsString(protein: Protein, outputFilename: String = "output.txt"): Unit = {
+    val file = new File(outputFilename)
+    val bw = new BufferedWriter(new FileWriter(file))
+    bw.write(protein.toString)
     bw.close()
   }
 
