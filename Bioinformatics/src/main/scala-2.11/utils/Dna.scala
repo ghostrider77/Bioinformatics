@@ -4,14 +4,8 @@ import scala.annotation.tailrec
 import Nucleotide.toChar
 
 case class Dna(sequence: List[DnaNucleotide]) {
+  import Dna.complements
   lazy val length: Int = sequence.length
-  val complements: Map[DnaNucleotide, DnaNucleotide] =
-    Map(
-      Adenine -> Thymine,
-      Cytosine -> Guanine,
-      Guanine -> Cytosine,
-      Thymine -> Adenine
-    )
 
   override def toString: String = sequence.map(toChar).mkString("")
 
@@ -28,6 +22,14 @@ case class Dna(sequence: List[DnaNucleotide]) {
 object Dna {
 
   def apply(sequence: String): Dna = Dna(sequence.toList.map(toNucleotide))
+
+  private val complements: Map[DnaNucleotide, DnaNucleotide] =
+    Map(
+      Adenine -> Thymine,
+      Cytosine -> Guanine,
+      Guanine -> Cytosine,
+      Thymine -> Adenine
+    )
 
   def toNucleotide(char: Char): DnaNucleotide = char match {
     case 'A' => Adenine

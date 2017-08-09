@@ -1,7 +1,7 @@
 package stronghold.strings
 
 import org.scalatest.{FreeSpec, Matchers}
-import utils.{Dna, Rna}
+import utils.{AminoAcid, Codon, Dna, Rna}
 import utils.UtilityFunctions.Fasta
 
 class StringsSuite extends FreeSpec with Matchers {
@@ -76,6 +76,17 @@ class StringsSuite extends FreeSpec with Matchers {
       val dna: Dna = Dna("ATCGC")
       val motif: Dna = Dna("CGT")
       convertToOneBasedIndexing(findStartingPositionsOfMotif(dna, motif)) shouldBe empty
+    }
+  }
+
+  "TranslatingRnaIntoProtein" - {
+    import TranslatingRnaIntoProtein.{getData, translate}
+    import utils.UtilityFunctions.readRnaCodonTable
+
+    "should translate an RNA string into a protein string" in {
+      val rna: Rna = getData(isPractice = true)
+      val codonTable: Map[Codon, Option[AminoAcid]] = readRnaCodonTable()
+      translate(rna, codonTable).toString shouldEqual "MAMAPRTEINSTRING"
     }
   }
 

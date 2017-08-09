@@ -1,11 +1,10 @@
 package stronghold.alignment
 
+/**
+  * problem description: http://rosalind.info/problems/hamm/
+  */
 
 object CountingPointMutations {
-
-  /**
-    * problem description: http://rosalind.info/problems/hamm/
-    */
 
   object SampleData {
     val sample: List[String] =
