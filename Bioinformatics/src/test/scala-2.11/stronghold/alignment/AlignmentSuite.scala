@@ -13,4 +13,18 @@ class AlignmentSuite extends FreeSpec with Matchers {
     }
   }
 
+  "EditDistance" - {
+    import EditDistance.{getData, calcLevenshteinDistance}
+
+    "should calculate the edit distance of the sample strings" in {
+      val List(string1, string2): List[String] = getData(isPractice = true)
+      calcLevenshteinDistance(string1, string2) shouldEqual 5
+    }
+
+    "should calculate the edit distance between a string and the empty string" in {
+      val s: String = "ABCDEF"
+      calcLevenshteinDistance(s, "") shouldEqual s.length
+    }
+  }
+
 }
