@@ -90,4 +90,33 @@ class StringsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "FindingASharedMotif" - {
+    import FindingASharedMotif.{getData, calcLongestCommonSubstring}
+
+    "should find the longest shared substring in a collection of strings" in {
+      val strings: List[String] = getData(isPractice = true)
+      List("AC", "CA", "TA") should contain (calcLongestCommonSubstring(strings).get)
+    }
+
+    "should return an empty string if there is no common substring" in {
+      val strings: List[String] = List("ACA", "GTT")
+      calcLongestCommonSubstring(strings) shouldBe None
+    }
+  }
+
+  "FindingASharedSplicedMotif" - {
+    import FindingASharedSplicedMotif.{getData, calcLongestCommonSubsequence}
+
+    "should find the longest common subsequence of two strings" in {
+      val List(string1, string2): List[String] = getData(isPractice = true)
+      List("AACTGG", "AACTTG") should contain (calcLongestCommonSubsequence(string1, string2))
+    }
+
+    "should return an empty string when there is no common subsequence" in {
+      val string1: String = "ACAA"
+      val string2: String = "TTTTTGGGGG"
+      calcLongestCommonSubsequence(string1, string2) shouldBe empty
+    }
+  }
+
 }
