@@ -1,6 +1,7 @@
 package stronghold.alignment
 
 import org.scalatest.{FreeSpec, Matchers}
+import utils.UtilityFunctions.Alignment
 
 class AlignmentSuite extends FreeSpec with Matchers {
 
@@ -24,6 +25,18 @@ class AlignmentSuite extends FreeSpec with Matchers {
     "should calculate the edit distance between a string and the empty string" in {
       val s: String = "ABCDEF"
       calcLevenshteinDistance(s, "") shouldEqual s.length
+    }
+  }
+
+  "EditDistanceAlignment" - {
+    import EditDistanceAlignment.{getData, calcGlobalAlignmentUsingHammingDistance}
+
+    "should calculate the global alignment score for the sample strings using Hamming distance scores" in {
+      val List(string1, string2): List[String] = getData(isPractice = true)
+      val result: Alignment = calcGlobalAlignmentUsingHammingDistance(string1, string2)
+      result.alignmentScore shouldEqual 4
+      result.alignedString1 shouldEqual "PRETTY--"
+      result.alignedString2 shouldEqual "PR-TTEIN"
     }
   }
 

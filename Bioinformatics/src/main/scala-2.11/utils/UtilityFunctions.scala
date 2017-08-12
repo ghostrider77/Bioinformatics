@@ -9,6 +9,8 @@ object UtilityFunctions {
 
   case class Fasta(name: String, string: String)
 
+  case class Alignment(alignedString1: String, alignedString2: String, alignmentScore: Int)
+
   def convertStringToIntList(line: String, sep: String = " "): List[Int] = line.split(sep).map(_.toInt).toList
 
   def convertToOneBasedIndexing(indices: List[Int]): List[Int] = indices.map(_ + 1)
@@ -88,6 +90,17 @@ object UtilityFunctions {
     val bw = new BufferedWriter(new FileWriter(file))
     bw.write(protein.toString)
     bw.close()
+  }
+
+  def writeAlignmentToFile(alignment: Alignment, outputFilename: String = "output.txt"): Unit = {
+    writeListOfListsAsStringsToFile(
+      List(
+        List(alignment.alignmentScore.toString),
+        List(alignment.alignedString1),
+        List(alignment.alignedString2)
+      ),
+      outputFilename = outputFilename
+    )
   }
 
 }
