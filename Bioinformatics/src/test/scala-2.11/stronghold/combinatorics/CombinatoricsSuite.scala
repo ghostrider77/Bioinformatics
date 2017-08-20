@@ -18,4 +18,20 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
 
   }
 
+  "RabbitsAndRecurrence" - {
+    import RabbitsAndRecurrence.{getData, calcGeneralizedFibonacciSequence}
+
+    "should calculate the total number of rabbit pairs after n months" in {
+      val List(n, k): List[Int] = getData(isPractice = true)
+      calcGeneralizedFibonacciSequence(n, k) shouldEqual 19L
+    }
+
+    "should have 1 + k rabbit pairs in the 3rd month" in {
+      val numberOfMonths: Int = 3
+      val reproductionOfARabbitPair: Int = 10
+      calcGeneralizedFibonacciSequence(numberOfMonths, reproductionOfARabbitPair) shouldEqual
+        1 + reproductionOfARabbitPair
+    }
+  }
+
 }
