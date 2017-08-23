@@ -34,4 +34,46 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "EnumeratingGeneOrders" - {
+    import EnumeratingGeneOrders.{getData, getPermutations}
+
+    "should calculate all permutations of the number 1 to n" in {
+      val n: Int = getData(isPractice = true)
+      val perms: List[List[Int]] = getPermutations(n)
+      perms.length shouldEqual 6
+      perms.toSet shouldEqual
+        Set(List(1, 2, 3), List(1, 3, 2), List(2, 1, 3), List(2, 3, 1), List(3, 1, 2), List(3, 2, 1))
+    }
+  }
+
+  "EnumeratingKmersLexicographically" - {
+    import EnumeratingKmersLexicographically.{getData, getOrderedKmers}
+
+    "should create all k-mers for the sample problem" in {
+      val (alphabet, k): (List[String], Int) = getData(isPractice = true)
+      getOrderedKmers(alphabet, k) shouldEqual
+        List("AA", "AC", "AG", "AT", "CA", "CC", "CG", "CT", "GA", "GC", "GG", "GT", "TA", "TC", "TG", "TT")
+    }
+
+    "should create all k-mers in the given lexicographic order" in {
+      val alphabet: List[String] = List("B", "A", "C")
+      getOrderedKmers(alphabet, 1) shouldEqual List("B", "A", "C")
+      getOrderedKmers(alphabet, 2) shouldEqual List("BB", "BA", "BC", "AB", "AA", "AC", "CB", "CA", "CC")
+    }
+  }
+
+  "OrderingStringsOfVaryingLength" - {
+    import OrderingStringsOfVaryingLength.{getData, generateOrderedAtMostKmers}
+
+    "should create all strings from the given alphabet with length at most k for the sample problem" in {
+      val (alphabet, k): (List[String], Int) = getData(isPractice = true)
+      generateOrderedAtMostKmers(alphabet, k) shouldEqual
+        List(
+          "D", "DD", "DDD", "DDN", "DDA", "DN", "DND", "DNN", "DNA", "DA", "DAD", "DAN", "DAA",
+          "N", "ND", "NDD", "NDN", "NDA", "NN", "NND", "NNN", "NNA", "NA", "NAD", "NAN", "NAA",
+          "A", "AD", "ADD", "ADN", "ADA", "AN", "AND", "ANN", "ANA", "AA", "AAD", "AAN", "AAA"
+        )
+    }
+  }
+
 }
