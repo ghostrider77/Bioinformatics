@@ -76,4 +76,13 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "MortalFibonacciRabbits" - {
+    import MortalFibonacciRabbits.{getData, calcMortalFibonacciSequence}
+
+    "should calculate the total number of rabbit pairs after n months when each rabbit lives for m months" in {
+      val List(n, m): List[Int] = getData(isPractice = true)
+      calcMortalFibonacciSequence(n, m) shouldEqual 4
+    }
+  }
+
 }

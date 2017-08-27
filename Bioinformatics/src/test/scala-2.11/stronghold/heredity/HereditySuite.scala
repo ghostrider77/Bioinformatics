@@ -18,4 +18,15 @@ class HereditySuite extends FreeSpec with Matchers {
     }
   }
 
+  "CalculatingExpectedOffspring" - {
+    import CalculatingExpectedOffspring.{getData, calcNumberOfOffspringsDisplayingDominantGenotype}
+    import Constants.absoluteTolerance
+
+    "should calculate the expected number of offspring displaying dominant phenotype" in {
+      val numberOfGenotypePairingCouples: List[Int] = getData(isPractice = true)
+      calcNumberOfOffspringsDisplayingDominantGenotype(numberOfGenotypePairingCouples) shouldEqual
+        (3.5 +- absoluteTolerance)
+    }
+  }
+
 }
