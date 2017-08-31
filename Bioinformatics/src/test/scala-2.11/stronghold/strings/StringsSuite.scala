@@ -119,4 +119,15 @@ class StringsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "LocatingRestrictionSites" - {
+    import LocatingRestrictionSites.{getData, findReversePalindromes}
+
+    "should locate position and length of those substrings in a DNA that are palindromes" in {
+      val List(sequence): List[Fasta] = getData(isPractice = true)
+      val dna: Dna = Dna(sequence.string)
+      findReversePalindromes(dna).map{ case (ix, l) => (ix + 1, l) }.toSet shouldEqual
+        Set((4, 6), (5, 4), (6, 6), (7, 4), (17, 4), (18, 4), (20, 6), (21, 4))
+    }
+  }
+
 }

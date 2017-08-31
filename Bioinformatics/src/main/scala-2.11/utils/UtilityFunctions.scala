@@ -44,8 +44,7 @@ object UtilityFunctions {
 
   def readRnaCodonTable(): Map[Codon, Option[AminoAcid]] = {
     val filename: String = "/datafiles/RNA_codon_table.txt"
-    val fileStream: InputStream = getClass.getResourceAsStream(filename)
-    val lines: Iterator[String] = scala.io.Source.fromInputStream(fileStream).getLines()
+    val lines: List[String] = readInputData(filename)
 
     def aminoAcidEncodedByCodon(line: String): (Codon, Option[AminoAcid]) = line.split(" ").toList match {
       case List(codon, oneLetterCode) => (Codon(codon.map(toNucleotide).toList), Some(AminoAcid(oneLetterCode.head)))
@@ -53,6 +52,16 @@ object UtilityFunctions {
     }
 
     lines.map(aminoAcidEncodedByCodon).toMap
+  }
+
+  def readMonoisotopicMassTable(): Map[AminoAcid, Double] = {
+    val filename: String = "/datafiles/monoisotopic_mass_table.txt"
+    val lines: List[String] = readInputData(filename)
+
+    (for { line <- lines } yield {
+      val Array(code, mass): Array[String] = line.split("\\s+")
+      AminoAcid(code.head) -> mass.toDouble
+    }).toMap
   }
 
   def writeListAsStringToFile[T](lst: List[T], outputFilename: String = "output.txt", sep: String = " "): Unit = {
