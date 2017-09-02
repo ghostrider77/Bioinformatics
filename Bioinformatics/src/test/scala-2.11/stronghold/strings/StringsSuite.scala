@@ -130,4 +130,23 @@ class StringsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "ConsensusAndProfile" - {
+    import ConsensusAndProfile.{getData, calcProfileAndConsensus, transformOutput}
+
+    "should calculate the profile matrix of DNA strings and the consensus string" in {
+      val sequences: List[Dna] = getData(isPractice = true)
+      val (profile, consensus): (List[List[Int]], Dna) = calcProfileAndConsensus(sequences)
+      val printableProfile: List[List[String]] = transformOutput(profile)
+
+      consensus shouldEqual Dna("ATGCAACT")
+      printableProfile shouldEqual
+        List(
+          List("A: 5 1 0 0 5 5 0 0"),
+          List("C: 0 0 1 4 2 0 6 1"),
+          List("G: 1 1 6 3 0 1 0 0"),
+          List("T: 1 5 0 0 0 1 1 6")
+        )
+    }
+  }
+
 }
