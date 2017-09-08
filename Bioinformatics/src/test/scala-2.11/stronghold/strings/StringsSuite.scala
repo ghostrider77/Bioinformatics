@@ -1,10 +1,11 @@
 package stronghold.strings
 
 import org.scalatest.{FreeSpec, Matchers}
-import utils.{AminoAcid, Codon, Dna, Rna}
-import utils.UtilityFunctions.Fasta
+import utils.{AminoAcid, Codon, Dna, Protein, Rna}
+import utils.UtilityFunctions.{Fasta, readRnaCodonTable}
 
 class StringsSuite extends FreeSpec with Matchers {
+  private lazy val codonTable: Map[Codon, Option[AminoAcid]] = readRnaCodonTable()
 
   object Constants {
     val absoluteTolerance: Double = 0.001
@@ -146,6 +147,16 @@ class StringsSuite extends FreeSpec with Matchers {
           List("G: 1 1 6 3 0 1 0 0"),
           List("T: 1 5 0 0 0 1 1 6")
         )
+    }
+  }
+
+  "RnaSplicing" - {
+    import RnaSplicing.{getData, findAndTranslateExons}
+
+    "should identify the exons and translate it to a protein" in {
+      val (dna, introns): (Dna, Set[Dna]) = getData(isPractice = true)
+      val protein: Option[Protein] = findAndTranslateExons(dna, introns, codonTable)
+      protein.get.toString shouldEqual "MVYIADKQHVASREAYGHMFKVCA"
     }
   }
 
