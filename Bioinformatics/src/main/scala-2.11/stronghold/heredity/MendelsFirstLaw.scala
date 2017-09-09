@@ -28,7 +28,7 @@ object MendelsFirstLaw {
     val dr: Double = d * r
     val hr: Double = 0.5 * h * r
 
-    val numberOfPossibleParentPairs: Int = (d + r + h).choose(2)
+    val numberOfPossibleParentPairs: Long = (d + r + h).choose(2)
     (dd + hh + dh + dr + hr) / numberOfPossibleParentPairs
   }
 
