@@ -1,10 +1,10 @@
 package stronghold.strings
 
-import org.scalatest.{FreeSpec, Matchers}
+import org.scalatest.{FreeSpec, Matchers, Inspectors}
 import utils.{AminoAcid, Codon, Dna, Protein, Rna}
 import utils.UtilityFunctions.{Fasta, readRnaCodonTable}
 
-class StringsSuite extends FreeSpec with Matchers {
+class StringsSuite extends FreeSpec with Matchers with Inspectors {
   private lazy val codonTable: Map[Codon, Option[AminoAcid]] = readRnaCodonTable()
 
   object Constants {
@@ -157,6 +157,19 @@ class StringsSuite extends FreeSpec with Matchers {
       val (dna, introns): (Dna, Set[Dna]) = getData(isPractice = true)
       val protein: Option[Protein] = findAndTranslateExons(dna, introns, codonTable)
       protein.get.toString shouldEqual "MVYIADKQHVASREAYGHMFKVCA"
+    }
+  }
+
+  "RandomString" - {
+    import RandomStrings.{getData, logprobabilityThatRandomStringWithGivenGcContentMatchesDna}
+    import Constants.absoluteTolerance
+
+    "should compute the logprobability that a random string with given GC-content match DNA exactly" in {
+      val (dna, gcContents): (Dna, List[Double]) = getData(isPractice = true)
+      val expectedLogProbs: List[Double] = List(-5.737, -5.217, -5.263, -5.360, -5.958, -6.628, -7.009)
+      forAll(logprobabilityThatRandomStringWithGivenGcContentMatchesDna(dna, gcContents).zip(expectedLogProbs)) {
+        case (logProb, expectedResult) => logProb shouldBe (expectedResult +- absoluteTolerance)
+      }
     }
   }
 
