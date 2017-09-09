@@ -2,7 +2,7 @@ package stronghold.combinatorics
 
 import org.scalatest.{FreeSpec, Matchers}
 import utils.UtilityFunctions.readRnaCodonTable
-import utils.{AminoAcid, Codon, Protein}
+import utils.{AminoAcid, Codon, Protein, Rna}
 
 
 class CombinatoricsSuite extends FreeSpec with Matchers {
@@ -82,6 +82,15 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     "should calculate the total number of rabbit pairs after n months when each rabbit lives for m months" in {
       val List(n, m): List[Int] = getData(isPractice = true)
       calcMortalFibonacciSequence(n, m) shouldEqual 4
+    }
+  }
+
+  "PerfectMatchings" - {
+    import PerfectMatchings.{getData, calcNumberOfPerfectMatchings}
+
+    "should calculate the total number of perfect matchings of basepair edges in the bonding graph" in {
+      val rna: Rna = getData(isPractice = true)
+      calcNumberOfPerfectMatchings(rna) shouldEqual 12
     }
   }
 
