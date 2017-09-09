@@ -94,4 +94,13 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "PartialPermutations" - {
+    import PartialPermutations.{getData, calcNumberOfPartialPermutations}
+
+    "should calculate the total number of partial permutations" in {
+      val List(n, k): List[Int] = getData(isPractice = true)
+      calcNumberOfPartialPermutations(n, k) shouldEqual 51200L
+    }
+  }
+
 }
