@@ -103,4 +103,19 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "EnumeratingOrientedGeneOrderings" - {
+    import EnumeratingOrientedGeneOrderings.{getData, getSignedPermutations}
+
+    "should retrieve all signed permutations" in {
+      val n: Int = getData(isPractice = true)
+      val numberOfSignedPermutations: Int = (1 to n).product * math.pow(2, n).toInt
+      numberOfSignedPermutations shouldEqual 8
+      getSignedPermutations(n).toSet shouldEqual
+        Set(
+          List("-1", "-2"), List("-1", "2"), List("1", "-2"), List("1", "2"),
+          List("-2", "-1"), List("-2", "1"), List("2", "-1"), List("2", "1")
+        )
+    }
+  }
+
 }
