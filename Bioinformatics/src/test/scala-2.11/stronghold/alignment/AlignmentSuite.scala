@@ -5,6 +5,8 @@ import utils.UtilityFunctions.Alignment
 
 class AlignmentSuite extends FreeSpec with Matchers {
 
+  private val absoluteTolerance: Double = 1e-03
+
   "CountingPointMutations" - {
     import CountingPointMutations.{getData, calcHammingDistance}
 
@@ -37,6 +39,16 @@ class AlignmentSuite extends FreeSpec with Matchers {
       result.alignmentScore shouldEqual 4
       result.alignedString1 shouldEqual "PRETTY--"
       result.alignedString2 shouldEqual "PR-TTEIN"
+    }
+  }
+
+  "TransitionsAndTransversions" - {
+    import TransitionsAndTransversions.{getData, calcTransitionTransversionRatio}
+    import utils.Dna
+
+    "should calculate the ratio of transitions and transversions" in {
+      val List(dna1, dna2): List[Dna] = getData(isPractice = true)
+      calcTransitionTransversionRatio(dna1, dna2) shouldBe (1.21428571429 +- absoluteTolerance)
     }
   }
 

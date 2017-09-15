@@ -118,4 +118,17 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "LongestIncreasingSubsequence" - {
+    import LongestIncreasingSubsequence.{getData, calcLongestIncreasingSubsequence}
+
+    "should retrieve the longest increasing subsequence of a sequence of numbers" in {
+      val sequence: List[Int] = getData(isPractice = true)
+      val longestIncreasingSubseq: List[Int] = calcLongestIncreasingSubsequence(sequence)
+      val longestDecreasingSubseq: List[Int] = calcLongestIncreasingSubsequence(sequence.reverse).reverse
+
+      longestIncreasingSubseq shouldEqual List(1, 2, 3)
+      longestDecreasingSubseq shouldEqual List(5, 4, 2)
+    }
+  }
+
 }
