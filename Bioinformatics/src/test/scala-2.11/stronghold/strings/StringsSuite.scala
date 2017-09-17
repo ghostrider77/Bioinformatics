@@ -173,4 +173,17 @@ class StringsSuite extends FreeSpec with Matchers with Inspectors {
     }
   }
 
+  "FindingASplicedMotif" - {
+    import FindingASplicedMotif.{getData, findIndicesOfMotifNucleotidesInDna}
+
+    "should find the indices of a subsequence of a DNA sequence" in {
+      val List(dna, motif): List[Dna] = getData(isPractice = true)
+      val indices: Option[List[Int]] = findIndicesOfMotifNucleotidesInDna(dna, motif)
+      val possiblePositions: Set[List[Int]] = Set(List(2, 3, 4), List(2, 7, 9), List(6, 7, 9))
+
+      indices shouldBe defined
+      possiblePositions should contain (indices.get)
+    }
+  }
+
 }
