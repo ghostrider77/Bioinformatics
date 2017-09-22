@@ -50,7 +50,6 @@ object FindingASplicedMotif {
   def main(args: Array[String]): Unit = {
     val List(dna, motif): List[Dna] = getData(isPractice = true)
     val result: Option[List[Int]] = findIndicesOfMotifNucleotidesInDna(dna, motif)
-    println(result.get)
     writeListAsStringToFile(convertToOneBasedIndexing(result.get))
   }
 

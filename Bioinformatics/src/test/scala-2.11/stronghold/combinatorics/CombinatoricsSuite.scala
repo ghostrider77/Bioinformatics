@@ -131,4 +131,13 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "MaximumMatchings" - {
+    import MaximumMatchings.{getData, calcNumberOfMaximumMatchings}
+
+    "should retrieve the total possible number of maximum matchings of basepair edges in the bonding graph" in {
+      val rna: Rna = getData(isPractice = true)
+      calcNumberOfMaximumMatchings(rna) shouldEqual 6
+    }
+  }
+
 }
