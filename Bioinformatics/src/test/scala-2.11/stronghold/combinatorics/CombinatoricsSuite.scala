@@ -140,4 +140,13 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "CountingSubsets" - {
+    import CountingSubsets.{getData, calcNumberOfSubsets}
+
+    "should calculate the total number of subsets of a set of size n" in {
+      val n: Int = getData(isPractice = true)
+      calcNumberOfSubsets(n) shouldEqual 8
+    }
+  }
+
 }
