@@ -39,16 +39,17 @@ object CatalanNumbers {
 
     def calcNumberOfMatchings(sequence: String): Long = {
       if (sequence.isEmpty) 1L
-      else if (noncrossingMatchings.contains(sequence)) noncrossingMatchings(sequence)
-      else {
-        val firstNucleotide: Char = sequence(0)
-        val numberOfNoncrossingMatches: Long = (1 until sequence.length by 2).foldLeft(0L){ case (acc, ix) =>
-          if (isMatchingPair(firstNucleotide, sequence(ix)))
-            (acc + calcNumberOfMatchings(sequence.slice(1, ix)) * calcNumberOfMatchings(sequence.drop(ix + 1))) %
-              Modulus
-          else acc
-        } % Modulus
-        noncrossingMatchings.getOrElseUpdate(sequence, numberOfNoncrossingMatches)
+      else noncrossingMatchings.get(sequence) match {
+        case Some(number) => number
+        case None =>
+          val firstNucleotide: Char = sequence(0)
+          val numberOfNoncrossingMatches: Long = (1 until sequence.length by 2).foldLeft(0L){ case (acc, ix) =>
+            if (isMatchingPair(firstNucleotide, sequence(ix)))
+              (acc + calcNumberOfMatchings(sequence.slice(1, ix)) * calcNumberOfMatchings(sequence.drop(ix + 1))) %
+                Modulus
+            else acc
+          } % Modulus
+          noncrossingMatchings.getOrElseUpdate(sequence, numberOfNoncrossingMatches)
       }
     }
 
