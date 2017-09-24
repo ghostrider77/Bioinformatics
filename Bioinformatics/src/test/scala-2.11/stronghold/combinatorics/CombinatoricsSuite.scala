@@ -149,4 +149,18 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "CatalanNumbers" - {
+    import CatalanNumbers.{getData, calcNumberOfNonCrossingPerfectMatchings}
+
+    "should calculate the total number of noncrossing perfect matchings of basepair edges in the bonding graph" in {
+      val testRna: Rna = getData(isPractice = true)
+      val rna1: Rna = Rna("UAGCGUGAUCAC")
+      val rna2: Rna = Rna("ACUGUA")
+
+      calcNumberOfNonCrossingPerfectMatchings(testRna) shouldEqual 2
+      calcNumberOfNonCrossingPerfectMatchings(rna1) shouldEqual 2
+      calcNumberOfNonCrossingPerfectMatchings(rna2) shouldEqual 0
+    }
+  }
+
 }
