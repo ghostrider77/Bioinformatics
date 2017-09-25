@@ -186,4 +186,14 @@ class StringsSuite extends FreeSpec with Matchers with Inspectors {
     }
   }
 
+  "SpeedingUpMotifFinding" - {
+    import SpeedingUpMotifFinding.{getData, createFailureArray}
+
+    "should compute the failure array of the given DNA string" in {
+      val dna: Dna = getData(isPractice = true)
+      createFailureArray(dna.toString.toVector, dna.length) shouldEqual
+        List(0, 0, 0, 1, 2, 0, 0, 0, 0, 0, 0, 1, 2, 1, 2, 3, 4, 5, 3, 0, 0)
+    }
+  }
+
 }
