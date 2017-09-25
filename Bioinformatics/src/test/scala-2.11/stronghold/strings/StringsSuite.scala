@@ -196,4 +196,14 @@ class StringsSuite extends FreeSpec with Matchers with Inspectors {
     }
   }
 
+  "MatchingRandomMotifs" - {
+    import MatchingRandomMotifs.{getData, probabilityThatAtLeastOneRandomStringMatchesDna}
+    import Constants.absoluteTolerance
+
+    "should calculate the probability that at least one of the strings equals the given DNA" in {
+      val (dna, n, gcContents): (Dna, Int, Double) = getData(isPractice = true)
+      probabilityThatAtLeastOneRandomStringMatchesDna(dna, n, gcContents) shouldBe (0.689 +- absoluteTolerance)
+    }
+  }
+
 }
