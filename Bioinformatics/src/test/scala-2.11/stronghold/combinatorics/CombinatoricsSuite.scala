@@ -163,4 +163,13 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "ReversalDistance" - {
+    import ReversalDistance.{getData, calcReversalDistanceOfPermutationPairs, Permutation}
+
+    "should calculate the reversal distance between a permutation pair" in {
+      val permutationPairs: List[(Permutation, Permutation)] = getData(isPractice = true)
+      calcReversalDistanceOfPermutationPairs(permutationPairs.drop(3)) shouldEqual List(7, 0)
+    }
+  }
+
 }
