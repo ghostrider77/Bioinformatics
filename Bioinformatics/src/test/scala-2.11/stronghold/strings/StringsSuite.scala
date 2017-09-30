@@ -206,4 +206,15 @@ class StringsSuite extends FreeSpec with Matchers with Inspectors {
     }
   }
 
+  "KMerComposition" - {
+    import KMerComposition.{getData, createKMerCompositionOfDna}
+    import utils.{DnaNucleotide, Adenine, Cytosine, Guanine, Thymine}
+
+    "should calculate the 4-mer composition of a DNA where the k-mers are lexicographically ordered" in {
+      val dna: Dna = Dna("ACGACCTACC")
+      val alphabet: List[DnaNucleotide] = List(Adenine, Cytosine, Guanine, Thymine)
+      createKMerCompositionOfDna(dna, alphabet, k = 2) shouldEqual List(0, 3, 0, 0, 0, 2, 1, 1, 1, 0, 0, 0, 1, 0, 0, 0)
+    }
+  }
+
 }
