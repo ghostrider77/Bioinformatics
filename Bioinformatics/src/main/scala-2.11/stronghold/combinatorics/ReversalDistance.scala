@@ -53,9 +53,9 @@ object ReversalDistance {
       }
     }
     val numberOfBreakPoints: Int = loop(0)
-    val leftEndCorection: Int = if (perm.head != 1) 1 else 0
-    val rightEndCorection: Int = if (perm.last != perm.length) 1 else 0
-    numberOfBreakPoints + leftEndCorection + rightEndCorection
+    val leftEndCorrection: Int = if (perm.head != 1) 1 else 0
+    val rightEndCorrection: Int = if (perm.last != perm.length) 1 else 0
+    numberOfBreakPoints + leftEndCorrection + rightEndCorrection
   }
 
   def keepNewPermutationsWithMaximumBreakPointReduction(newNeighbours: Set[(Permutation, Int)]): Set[Permutation] = {

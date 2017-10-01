@@ -172,4 +172,14 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "SortingByReversal" - {
+    import SortingByReversals.{getData, sortingByReversals, Permutation}
+
+    "should compute the reversal distance of 2 permutations" in {
+      val List(perm1, perm2): List[Permutation] = getData(isPractice = true)
+      val (distance, _): (Int, List[(Int, Int)]) = sortingByReversals(perm1, perm2)
+      distance shouldEqual 2
+    }
+  }
+
 }
