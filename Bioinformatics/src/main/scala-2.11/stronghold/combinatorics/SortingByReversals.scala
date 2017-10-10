@@ -91,7 +91,6 @@ object SortingByReversals {
     loop(Set(perm), 0, Map())
   }
 
-
   def getReversals(backtrack: Map[Permutation, Permutation], identity: Permutation): List[(Int, Int)] = {
     @tailrec
     def loop(perm: Permutation, reversals: List[(Int, Int)]): List[(Int, Int)] = backtrack.get(perm) match {

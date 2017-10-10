@@ -182,4 +182,16 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "IntroductionToAlternativeSplicing" - {
+    import IntroductionToAlternativeSplicing.{getData, sumOfSubsetsOfGivenSize}
+
+    "should calculate the sum of binomial coefficients in the last row of a Pascal triangle" in {
+      val List(n, m): List[Int] = getData(isPractice = true)
+      sumOfSubsetsOfGivenSize(n, m) shouldEqual 42
+      sumOfSubsetsOfGivenSize(5, 5) shouldEqual 1
+      sumOfSubsetsOfGivenSize(5, 0) shouldEqual 32
+
+    }
+  }
+
 }
