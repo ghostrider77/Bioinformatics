@@ -32,7 +32,7 @@ object IntroductionToAlternativeSplicing {
         pascalTriangle.get((a, b)) match {
           case Some(coeff) => coeff
           case None =>
-            val coeff: Int = getBinomialCoefficient(a - 1, b - 1) + getBinomialCoefficient(a - 1, b) % Modulus
+            val coeff: Int = (getBinomialCoefficient(a - 1, b - 1) + getBinomialCoefficient(a - 1, b)) % Modulus
             pascalTriangle += (a,b) -> coeff
             coeff
         }

@@ -52,4 +52,13 @@ class AlignmentSuite extends FreeSpec with Matchers {
     }
   }
 
+  "ShortestCommonSupersequence" - {
+    import ShortestCommonSupersequence.{getData, calcShortestCommonSupersequence}
+
+    "should calculate the shortest common supersequence of two strings" - {
+      val List(string1, string2): List[String] = getData(isPractice = true)
+      calcShortestCommonSupersequence(string1, string2) shouldEqual "ATGCATGAT"
+    }
+  }
+
 }
