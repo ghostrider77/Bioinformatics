@@ -217,4 +217,17 @@ class StringsSuite extends FreeSpec with Matchers with Inspectors {
     }
   }
 
+  "ExpectedNumberOfRestrictionSites" - {
+    import ExpectedNumberOfRestrictionSites.{getData, expectedNumberOfTimesThatStringAppearsInDna}
+    import Constants.absoluteTolerance
+
+    "should retrieve the expected number that the given string appears as substring in a DNA with given GC-content" in {
+      val (n, dna, gcContents): (Int, Dna, List[Double]) = getData(isPractice = true)
+      val expectedCounts: List[Double] = List(0.422, 0.563, 0.422)
+      forAll(expectedNumberOfTimesThatStringAppearsInDna(n, dna, gcContents).zip(expectedCounts)) {
+        case (average, expectedCount) => average shouldBe (expectedCount +- absoluteTolerance)
+      }
+    }
+  }
+
 }
