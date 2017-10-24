@@ -194,4 +194,20 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "SetOperations" - {
+    import SetOperations.{getData, createSets}
+
+    "should retrieve the results of basic set operations" in {
+      val (n, s1, s2): (Int, Set[Int], Set[Int]) = getData(isPractice = true)
+      createSets(n, s1, s2) shouldEqual
+        List(
+          Set(1, 2, 3, 4, 5, 8, 10),
+          Set(2, 5),
+          Set(1, 3, 4),
+          Set(8, 10),
+          Set(6, 7, 8, 9, 10),
+          Set(1, 3, 4, 6, 7, 9)
+        )
+    }
+  }
 }

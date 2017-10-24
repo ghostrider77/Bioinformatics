@@ -111,5 +111,4 @@ object UtilityFunctions {
       outputFilename = outputFilename
     )
   }
-
 }
