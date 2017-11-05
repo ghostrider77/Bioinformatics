@@ -22,4 +22,13 @@ class MassSpectrometrySuite extends FreeSpec with Matchers {
     }
   }
 
+  "InferringProteinFromSpectrum" - {
+    import InferringProteinFromSpectrum.{getData, getProteinFromPrefixSpectrum}
+
+    "should return a protein string whose prefix spectrum is equal to the given list of masses" in {
+      val prefixSpectrum: List[Double] = getData(isPractice = true)
+      getProteinFromPrefixSpectrum(prefixSpectrum).toString shouldEqual "WMQS"
+    }
+  }
+
 }
