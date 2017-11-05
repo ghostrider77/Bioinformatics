@@ -44,9 +44,6 @@ object InferringProteinFromSpectrum {
     identifyProtein(aminoAcidMassesInProtein)
   }
 
-  def calcProteinWeight(protein: Protein, aminoAcidMassTable: Map[AminoAcid, Double]): Double =
-    protein.sequence.foldLeft(0.0){ case (acc, aminoAcid) => acc + aminoAcidMassTable(aminoAcid) }
-
   def main(args: Array[String]): Unit = {
     val prefixSpectrum: List[Double] = getData(isPractice = false)
     val result: Protein = getProteinFromPrefixSpectrum(prefixSpectrum)
