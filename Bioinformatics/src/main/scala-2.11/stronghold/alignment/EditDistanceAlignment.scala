@@ -69,7 +69,7 @@ object EditDistanceAlignment {
       if (ix > 0 && jy > 0) {
         val previousNodeOnGrid: Int = backtrack(ix - 1)(jy - 1)
         if (previousNodeOnGrid == 0)
-          assemble(ix - 1, jy - 1, string1(ix - 1) :: alignedString1, string2(jy  -1) :: alignedString2)
+          assemble(ix - 1, jy - 1, string1(ix - 1) :: alignedString1, string2(jy - 1) :: alignedString2)
         else if (previousNodeOnGrid == -1)
           assemble(ix - 1, jy, string1(ix - 1) :: alignedString1, GapSymbol :: alignedString2)
         else assemble(ix, jy - 1, GapSymbol :: alignedString1, string2(jy - 1) :: alignedString2)

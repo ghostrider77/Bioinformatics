@@ -210,4 +210,13 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
         )
     }
   }
+
+  "MotzkinNumbers" - {
+    import MotzkinNumbers.{getData, calcNumberOfAllNonCrossingMatchings}
+
+    "should calculate the total number of noncrossing matchings of basepair edges in the bonding graph" in {
+      val rna: Rna = getData(isPractice = true)
+      calcNumberOfAllNonCrossingMatchings(rna) shouldEqual 7
+    }
+  }
 }
