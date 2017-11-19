@@ -37,4 +37,20 @@ class PhylogenySuite extends FreeSpec with Matchers with Inspectors {
       }
     }
   }
+
+  "DistancesInTree" - {
+    import DistancesInTrees.{NewickTree, NodePair, getData, calcDistancesInNewickTrees, calcDistanceBetweenNodes}
+
+    "should calculate the distance between two nodes in an unweighted Newick tree for the test cases" in {
+      val treesAndNodePairs: List[(NewickTree, NodePair)] = getData(isPractice = true)
+      calcDistancesInNewickTrees(treesAndNodePairs) shouldEqual List(1, 2)
+    }
+
+    "should calculate the distance between two nodes in an unweighted Newick tree for a larger tree" in {
+      val tree: NewickTree = "(((a,b),(c,d)x),((f,g),e)y);"
+      val node1: String = "a"
+      val node2: String = "e"
+      calcDistanceBetweenNodes(tree, node1, node2) shouldEqual 5
+    }
+  }
 }
