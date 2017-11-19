@@ -42,4 +42,15 @@ class GraphsSuite extends FreeSpec with Matchers {
     }
   }
 
+  "PatternMatching" - {
+    import PatternMatching.{getData, createTrieAdjacencyList}
+
+    "should return the adjacency list corresponding to the trie built for given words" in {
+      val strings: List[String] = getData(isPractice = true)
+      val trie: Trie = Trie(strings)
+      createTrieAdjacencyList(trie) should contain theSameElementsAs
+        List("1 2 A", "2 3 T", "3 4 A", "4 5 G", "5 6 A", "3 7 C", "1 8 G", "8 9 A", "9 10 T")
+    }
+  }
+
 }
