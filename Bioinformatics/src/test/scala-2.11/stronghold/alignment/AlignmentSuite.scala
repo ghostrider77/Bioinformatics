@@ -55,9 +55,18 @@ class AlignmentSuite extends FreeSpec with Matchers {
   "ShortestCommonSupersequence" - {
     import ShortestCommonSupersequence.{getData, calcShortestCommonSupersequence}
 
-    "should calculate the shortest common supersequence of two strings" - {
+    "should calculate the shortest common supersequence of two strings" in {
       val List(string1, string2): List[String] = getData(isPractice = true)
       calcShortestCommonSupersequence(string1, string2) shouldEqual "ATGCATGAT"
+    }
+  }
+
+  "FindingDisjointMotifsInAGene" - {
+    import FindingDisjointMotifsInAGene.{getData, calcFeasibilityMatrix}
+
+    "should return a matrix with element 1 if the jth and kth pattern can be interwoven into dna and 0 otherwise" in {
+      val (dna, patterns): (String, List[String]) = getData(isPractice = true)
+      calcFeasibilityMatrix(dna, patterns) shouldEqual Array(Array(0, 0, 1), Array(0, 1, 0), Array(1, 0, 0))
     }
   }
 
