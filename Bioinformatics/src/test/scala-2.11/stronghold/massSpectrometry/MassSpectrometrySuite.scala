@@ -31,4 +31,16 @@ class MassSpectrometrySuite extends FreeSpec with Matchers {
     }
   }
 
+  "SpectralConvolution" - {
+    import SpectralConvolution.{getData, calcConvolutionOfSpectra}
+    import Constants.absoluteTolerance
+
+    "should calculate the largest multiplicity of the convolution of two spectra" in {
+      val List(spectrum1, spectrum2): List[List[Double]] = getData(isPractice = true)
+      val (multiplicity, shift): (Int, Double) = calcConvolutionOfSpectra(spectrum1, spectrum2)
+      multiplicity shouldEqual 3
+      shift shouldBe (85.03163 +- absoluteTolerance)
+    }
+  }
+
 }
