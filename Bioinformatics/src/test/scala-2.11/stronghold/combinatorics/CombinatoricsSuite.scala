@@ -219,4 +219,14 @@ class CombinatoricsSuite extends FreeSpec with Matchers {
       calcNumberOfAllNonCrossingMatchings(rna) shouldEqual 7
     }
   }
+
+  "WobbleBonding" - {
+    import WobbleBonding.{getData, calcNumberOfValidMatchings}
+
+    "should calculate the number of distinct valid matchings of basepair edges in the bonding graph of s" in {
+      val rna: Rna = getData(isPractice = true)
+      calcNumberOfValidMatchings(rna) shouldEqual BigInt(284850219977421L)
+    }
+  }
+
 }
