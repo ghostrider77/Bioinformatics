@@ -168,7 +168,7 @@ object Graph {
 
   def getIncomingEdges(graph: Graph): Map[Node, List[Node]] =
     (for {
-      (node, neighbours) <- graph.adjacencyList
+      (node, neighbours) <- graph.adjacencyList.toIterator
       neighbour <- neighbours
     } yield (neighbour, node))
       .toList
