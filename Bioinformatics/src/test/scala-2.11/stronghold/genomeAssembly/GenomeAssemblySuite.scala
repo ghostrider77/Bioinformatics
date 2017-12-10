@@ -1,8 +1,15 @@
 package stronghold.genomeAssembly
 
-import org.scalatest.{FreeSpec, Matchers}
+import org.scalatest.{FreeSpec, Matchers, Inspectors}
 
-class GenomeAssemblySuite extends FreeSpec with Matchers {
+class GenomeAssemblySuite extends FreeSpec with Matchers with Inspectors {
+
+  object Utilities {
+    def cyclicPermutationOfString(s: String, m: Int): String = {
+      val (first, last) = s.splitAt(m)
+      last + first
+    }
+  }
 
   "ErrorCorrectionInReads" - {
     import ErrorCorrectionInReads.{getData, identifyIncorrectReads}
@@ -50,6 +57,36 @@ class GenomeAssemblySuite extends FreeSpec with Matchers {
       val n75: Int = calcNStatistics(dnaStrings, 75)
       n50 shouldEqual 7
       n75 shouldEqual 6
+    }
+  }
+
+  "GenomeAssemblyWithPerfectCoverageAndRepeats" - {
+    import GenomeAssemblyWithPerfectCoverageAndRepeats.{getData, getCircularStringSpelledByEdges}
+    import DeBruijnGraph.{Path, findAllEulerianPaths}
+    import Utilities.cyclicPermutationOfString
+
+    "should retrieve all circular strings assembled by complete cycles in the de Bruijn graph" in {
+      val dnaStrings: List[String] = getData(isPractice = true)
+      val k: Int = dnaStrings.head.length
+      val graph = new DeBruijnGraph(dnaStrings, k)
+      val paths: Set[Path] = findAllEulerianPaths(graph.adjacencyList)
+      val circularStrings: Set[String] = paths.map(getCircularStringSpelledByEdges(_, k))
+
+      val length: Int = circularStrings.head.length
+      val expectedStrings: Set[String] =
+        Set(
+          "CAGTTCAATTTGGCGTT",
+          "CAGTTCAATTGGCGTTT",
+          "CAGTTTCAATTGGCGTT",
+          "CAGTTTGGCGTTCAATT",
+          "CAGTTGGCGTTCAATTT",
+          "CAGTTGGCGTTTCAATT"
+        )
+
+      circularStrings should have size 6
+      forAll(circularStrings) { s =>
+        (0 until length).exists(c => expectedStrings.contains(cyclicPermutationOfString(s, c))) should be (true)
+      }
     }
   }
 
