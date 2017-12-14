@@ -53,4 +53,14 @@ class PhylogenySuite extends FreeSpec with Matchers with Inspectors {
       calcDistanceBetweenNodes(tree, node1, node2) shouldEqual 5
     }
   }
+
+  "CreatingACharacterTable" - {
+    import CreatingACharacterTable.{getData, createCharacterTableFromNewickTree}
+
+    "should create a character table having the same splits as the edge splits of the tree" in {
+      val newickTreeString: String = getData(isPractice = true)
+      createCharacterTableFromNewickTree(newickTreeString) should contain theSameElementsAs
+        List(List(false, false, true, true, false), List(false, false, true, true, true))
+    }
+  }
 }
